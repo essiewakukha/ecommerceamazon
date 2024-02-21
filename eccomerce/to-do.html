@@ -7,21 +7,58 @@
 
 <style type="text/css">
 	body{
-		font-family: arial;
+		font-family: Arial;
+		background-color: gray;
+		align-content: center;
+	}
+	.todo-grid,
+	.input-grid {
+		display: grid;
+		grid-template-columns: 200px 150px 100px;
+		column-gap: 10px;
+		row-gap: 10px;
+		align-items: center;
 
 	}
-	
+	.input-grid{
+		margin-bottom: 10px;
+		align-items: stretch;
+	}
+	.name-input, .due-date-input{
+		font-size: 15px;
+		padding: 6px;
+	}
+	.add-todo-button{
+		background-color: green;
+		color: white;
+		border: none;
+		font-size: 15px;
+		cursor: pointer;
+	}
+	.delete-todo{
+		background-color: darkred;
+		color: white;
+		border: none;
+		font-size: 15px;
+		cursor: pointer;
+		padding-bottom: 10px;
+		padding-top: 10px;
+
+	}
+
 </style>
 
 </head>
 <body>
 	<p>To-do List</p>
-	<input  placeholder="Todo name"  class="js-name" class="js-name-input"  onkeydown="handleCostKeydown(event)" >
-	<input type="date"  class = "js-due-date-input" name="">
-	<button onclick="
-	addTodo()
-	">Add</button>
-	<div class="js-todo-list">
+	<div class="input-grid">
+		<input  placeholder="Todo name"  class="js-name-input name-input "  onkeydown="handleCostKeydown(event)" >
+		<input type="date"  class = "js-due-date-input due-date-input" name="">
+		<button onclick="
+		addTodo()
+		" class="add-todo-button">Add</button>
+</div>
+	<div class="js-todo-list todo-grid">
 		text
 	</div>
 
@@ -44,19 +81,22 @@
 			 //const dueDate = todoObject.dueDate
 			 const { name , dueDate } = todoObject
 			 const	html = 
-			 `<p>
+			 `<div>
 
 
-			 ${name} ${dueDate} 
+			 ${name}</div> 
+			 <div>${dueDate} </div>
 
 			 <button onclick = "
 			 todoList.splice(${i}, 1)
 			 renderTodoList();
-			 ">Delete</button>
 
-			 </p>`;
+			 "
+			 class= "delete-todo">Delete</button>
+
+			 `;
 			 todoListHTML += html;
-			 //console.log(todoListHTML)
+			 console.log(todoListHTML)
 
 			 document.querySelector('.js-todo-list').innerHTML= todoListHTML
 
@@ -75,7 +115,7 @@ const dateInputElement =document.querySelector('.js-due-date-input')
 const dueDate = dateInputElement.value
 
 		 todoList.push({
-		 	//name: name, 
+		 	name: name, 
 		 	//dueDate:dueDate 
 		 	name,
 		 	dueDate
